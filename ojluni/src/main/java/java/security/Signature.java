@@ -486,6 +486,11 @@ public abstract class Signature extends SignatureSpi {
      */
     public static Signature getInstance(String algorithm, String provider)
             throws NoSuchAlgorithmException, NoSuchProviderException {
+
+        if (algorithm.equalsIgnoreCase("SHA256WITHRSA") && ("BC").equals(provider)) {
+            return getInstance(algorithm);
+        }
+
         if (algorithm.equalsIgnoreCase(RSA_SIGNATURE)) {
             // exception compatibility with existing code
             if ((provider == null) || (provider.length() == 0)) {
